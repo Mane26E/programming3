@@ -219,3 +219,7 @@ function addGrassEater() {
         }
     }
 }
+
+
+
+console.log("Hello world")
