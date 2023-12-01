@@ -2,7 +2,7 @@ class Person {
     constructor(x, y) {
         this.x = x;
         this.y = y;
-        this.energy = 10;
+        this.energy = 25;
         this.directions = [];
 
     }
@@ -57,7 +57,7 @@ class Person {
         let food = random(foods)
 
         if (food) {
-            this.energy += 5
+            this.energy += 10
             let newX = food[0]
             let newY = food[1]
 
@@ -96,7 +96,7 @@ class Person {
     }
 
     move() {
-        let emptyCells = this.chooseCell(0)
+        let emptyCells = this.chooseCell(0,1)
         let newCell = random(emptyCells)
 
         if (newCell) {
@@ -124,6 +124,7 @@ class Person {
         for (let i in personArr) {
             if (this.x == personArr[i].x && this.y == personArr[i].y) {
                 personArr.splice(i, 1);
+                matrix[this.y][this.x] = 0;
                 break;
             }
         }
