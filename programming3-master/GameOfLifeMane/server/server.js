@@ -3,8 +3,6 @@ let app = express();
 let server = require('http').Server(app);
 let io = require('socket.io')(server);
 let fs = require("fs");
-const AntiVenom = require('./antiVenom');
-
 app.use(express.static("../client"));
 
 app.get('/', function (req, res) {
@@ -105,7 +103,7 @@ antiVenomArr = [];
 
 Grass = require("./grass");
 GrassEater = require("./grassEater");
-Gredator = require("./predator");
+Predator = require("./predator");
 Person = require("./person");
 Poison = require("./poison");
 AntiVenom = require("./antiVenom");
@@ -117,7 +115,7 @@ function createObject(matrix) {
             if (matrix[y][x] == 1) {
                 var gr = new Grass(x, y, 1);
                 grassArr.push(gr)
-            }else if (matrix[y][x] == 2) {
+            } else if (matrix[y][x] == 2) {
                 var grEater = new GrassEater(x, y, 2);
                 grassEaterArr.push(grEater)
             } else if (matrix[y][x] == 3) {
@@ -135,10 +133,12 @@ function createObject(matrix) {
             }
         }
     }
+
+    io.sockets.emit('send matrix', matrix)
+
 }
 
 
-io.sockets.emit('send matrix', matrix)
 
 
 function methods() {
@@ -165,6 +165,7 @@ function methods() {
     }
     io.sockets.emit("send matrix", matrix);
 }
+setInterval(methods, 1000)
 
 io.on('connection', function () {
     createObject(matrix)

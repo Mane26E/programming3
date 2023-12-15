@@ -1,12 +1,14 @@
 let LivingCreature = require('./livingCreature');
 
 module.exports = class Grass extends LivingCreature {
-    mull() {
-        this.multiple++;
+    mul() {
+        this.multiply++;
         let emptyCell = this.chooseCell(0);
-        //let newCell = random(emptyCell);
         let newCell = emptyCell[Math.floor(Math.random() * emptyCell.length)]
-        if (newCell && this.multiple >= 8) {
+
+        if (newCell && this.multiply >= 4) {
+            
+
             let newX = newCell[0];
             let newY = newCell[1];
             matrix[newY][newX] = 1;
@@ -16,8 +18,8 @@ module.exports = class Grass extends LivingCreature {
         }
 
 
-
-
+       
 
     }
+    
 }

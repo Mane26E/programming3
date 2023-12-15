@@ -22,7 +22,7 @@ module.exports = class Person extends LivingCreature {
     }
 
    
-    mull() {
+    mul() {
         let emptyCell = this.chooseCell(0);
         let newCell = emptyCell[Math.floor(Math.random() * emptyCell.length)]
 
@@ -73,7 +73,7 @@ module.exports = class Person extends LivingCreature {
             this.x = newX
             this.y = newY
             if (this.energy >= 20) {
-                this.mull()
+                this.mul()
             }
         } else {
             this.move();
@@ -81,8 +81,8 @@ module.exports = class Person extends LivingCreature {
     }
 
     move() {
-        let emptyCells = this.chooseCell(0,1)
-        let newCell = random(emptyCells)
+        let emptyCell = this.chooseCell(0,1)
+        let newCell = emptyCell[Math.floor(Math.random() * emptyCell.length)]
 
         if (newCell) {
             this.energy--

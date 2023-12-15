@@ -3,7 +3,7 @@ let side = 20;
 
 function setup() {
     frameRate(5);
-    createCanvas(matrix[0].length * side, matrix.length * side);
+    createCanvas(35* side, 35* side);
 }
 
 

@@ -37,9 +37,9 @@ module.exports = class  AntiVenom extends LivingCreature {
         return found;
     }
 
-    mull() {
+    mul() {
         let emptyCell = this.chooseCell(4);
-        let newCell = random(emptyCell);
+        let newCell = emptyCell[Math.floor(Math.random() * emptyCell.length)]
 
         if (newCell) {
             let newX = newCell[0];
@@ -79,7 +79,7 @@ module.exports = class  AntiVenom extends LivingCreature {
             this.x = newX
             this.y = newY
             if (this.energy >= 27) {
-                this.mull()
+                this.mul()
             }
 
         } else {
@@ -91,8 +91,8 @@ module.exports = class  AntiVenom extends LivingCreature {
 
 
     move() {
-        let emptyCells = this.chooseCell(0,1)
-        let newCell = random(emptyCells)
+        let emptyCell = this.chooseCell(0,1)
+        let newCell = emptyCell[Math.floor(Math.random() * emptyCell.length)]
 
         if (newCell) {
 
