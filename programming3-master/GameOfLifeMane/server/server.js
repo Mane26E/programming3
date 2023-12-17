@@ -3,6 +3,7 @@ let app = express();
 let server = require('http').Server(app);
 let io = require('socket.io')(server);
 let fs = require("fs");
+
 app.use(express.static("../client"));
 
 app.get('/', function (req, res) {
@@ -171,3 +172,30 @@ io.on('connection', function () {
     createObject(matrix)
 })
 
+
+
+let statistic = {
+    grass:0,
+    grassEater:0,
+    predator:0,
+    poison:0,
+    person:0,
+    antiVenom:0
+
+}
+
+
+setInterval(function(){
+    statistic.grass = grassArr.length;
+    statistic.grassEater = grassEaterArr.length;
+    statistic.predator = predatorArr.length;
+    statistic.poison = poisonArr.length;
+    statistic.person = personArr.length;
+    statistic.antiVenom = antiVenomArr.length;
+
+    fs.writeFile("statistics.json", JSON.stringify(statistic),()=>{
+        console.log("Writed statistic to file !!!");
+    })
+
+
+}, 1000)
