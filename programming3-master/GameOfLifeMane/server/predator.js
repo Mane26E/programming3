@@ -23,7 +23,10 @@ module.exports = class Predator extends LivingCreature {
         ];
     }
 
-    
+    chooseCell(char1) {
+        this.getNewCoordinates();
+         return super.chooseCell(char1)
+    }
 
 
     mul() {

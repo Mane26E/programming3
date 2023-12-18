@@ -1,6 +1,13 @@
 let socket = io();
 let weather = "";
 
+let lightingButton = document.getElementById("lighting");
+lightingButton.addEventListener("click",function(){
+    weather = "lighting"
+})
+
+
+
 let winterButton = document.getElementById("winter");
 winterButton.addEventListener("click",function(){
     weather = "winter"
@@ -35,16 +42,16 @@ function nkarel(matrix) {
             if (matrix[y][x] == 1) {
                 fill('green')
                 rect(x * side, y * side, side, side);
-                    text("🌱", x * side, y * side, side, side);
+                    
                     textSize(side)
                 if (weather == "winter") {
-                    fill('white')
+                    fill('#F2F7FD')
                     rect(x * side, y * side, side, side);
                     text("❄️", x * side, y * side, side, side);
                     textSize(side)
                     
                 } else if (weather == "spring") {
-                    fill('green');
+                    fill('#487800');
                     rect(x * side, y * side, side, side);
                     text("🌷", x * side, y * side, side, side);
                     textSize(side)
@@ -54,26 +61,26 @@ function nkarel(matrix) {
                     text("🌿", x * side, y * side, side, side);
                     textSize(side)
                 } else if (weather == "autumn") {
-                    fill('orange');
+                    fill('#996515');
                     rect(x * side, y * side, side, side);
                     text("🍂", x * side, y * side, side, side);
                     textSize(side)
                 }
             
             } else if (matrix[y][x] == 2) {
-                fill('yellow');
+                fill('#989898');
                 rect(x * side, y * side, side, side);
                 text("🐰", x * side, y * side, side, side);
                 textSize(side)
             } else if (matrix[y][x] == 3) {
-                fill('red');
+                fill('#6F4E37');
                 rect(x * side, y * side, side, side);
                 text("🐻", x * side, y * side, side, side);
                 textSize(side)
             } else if (matrix[y][x] == 4) {
-                fill("#eab676")
+                fill( "#BDA55D")
                 rect(x * side, y * side, side, side);
-                text("👱🏼‍♂️", x * side, y * side, side, side);
+                text("👨🏻", x * side, y * side, side, side);
                 textSize(side)
             } else if (matrix[y][x] == 5) {
                 fill('black');
@@ -86,7 +93,12 @@ function nkarel(matrix) {
                 rect(x * side, y * side, side, side);
                 text("💊", x * side, y * side, side, side);
                 textSize(side)
-            } else {
+            } else if (matrix[y][x] == 7) {
+                fill('#ADADC9');
+                rect(x * side, y * side, side, side);
+                text("⚡️", x * side, y * side, side, side);
+                textSize(side)
+            }else {
                 fill('gray');
                 rect(x * side, y * side, side, side);
 

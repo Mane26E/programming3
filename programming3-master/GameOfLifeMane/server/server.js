@@ -173,6 +173,27 @@ io.on('connection', function () {
 })
 
 
+function lighting() {
+    for (let y = 0; y < matrix.length; y++) {
+        for (let x = 0; x < matrix[y].length; x++) {
+            if (matrix[y][x] == 0) {
+                matrix[y][x] = 7
+                io.sockets.emit("send matrix", matrix)
+                return
+            }
+
+        }
+
+    }
+    if (matrix[y][x] == 0) {
+        matrix[y][x] = 6
+    }
+}
+
+io.on('connection',function(socket){
+    createObject(matrix)
+    socket.on("lighting", lighting)
+})
 
 let statistic = {
     grass:0,
@@ -198,4 +219,4 @@ setInterval(function(){
     })
 
 
-}, 1000)
+}, 6000)

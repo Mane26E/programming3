@@ -21,6 +21,10 @@ module.exports = class Poison extends LivingCreature {
         ];
     }
 
+    chooseCell(char1,char2,char3,char4) {
+        this.getNewCoordinates();
+         return super.chooseCell(char1,char2,char3,char4)
+    }
 
 
     eat() {

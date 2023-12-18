@@ -3,7 +3,7 @@ let LivingCreature = require('./livingCreature');
 module.exports = class GrassEater extends LivingCreature{
     constructor(x, y) {
         super(x,y)
-        this.energy = 10;
+        this.energy = 15;
      
     }
 
@@ -38,7 +38,7 @@ module.exports = class GrassEater extends LivingCreature{
             let grEat = new GrassEater(newX, newY);
             grassEaterArr.push(grEat);
 
-            this.energy = 15;
+            this.energy = 20;
 
         }
     }
