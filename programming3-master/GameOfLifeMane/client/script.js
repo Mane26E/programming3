@@ -4,6 +4,7 @@ let weather = "";
 let lightingButton = document.getElementById("lighting");
 lightingButton.addEventListener("click",function(){
     weather = "lighting"
+    socket.emit("lighting",2)
 })
 
 

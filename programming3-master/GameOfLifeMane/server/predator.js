@@ -49,7 +49,7 @@ module.exports = class Predator extends LivingCreature {
         let food = foods[Math.floor(Math.random() * foods.length)]
 
         if (food) {
-            this.energy += 5
+            this.energy += 10
             let newX = food[0]
             let newY = food[1]
 

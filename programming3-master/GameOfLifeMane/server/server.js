@@ -3,6 +3,7 @@ let app = express();
 let server = require('http').Server(app);
 let io = require('socket.io')(server);
 let fs = require("fs");
+//const Lighting = require('./lighting');
 
 app.use(express.static("../client"));
 
@@ -85,6 +86,7 @@ function matrixGenerator(matrixSize, grassCount, grassEaterCount, predatorCount,
         }
     }
 
+   
 
     return matrix;
 
@@ -100,6 +102,7 @@ predatorArr = [];
 personArr = [];
 poisonArr = [];
 antiVenomArr = [];
+lightingArr = []
 
 
 Grass = require("./grass");
@@ -108,29 +111,33 @@ Predator = require("./predator");
 Person = require("./person");
 Poison = require("./poison");
 AntiVenom = require("./antiVenom");
+Lighting = require("./lighting")
 
 
 function createObject(matrix) {
     for (var y = 0; y < matrix.length; y++) {
         for (var x = 0; x < matrix[y].length; x++) {
             if (matrix[y][x] == 1) {
-                var gr = new Grass(x, y, 1);
+                var gr = new Grass(x, y);
                 grassArr.push(gr)
             } else if (matrix[y][x] == 2) {
-                var grEater = new GrassEater(x, y, 2);
+                var grEater = new GrassEater(x, y);
                 grassEaterArr.push(grEater)
             } else if (matrix[y][x] == 3) {
-                let pred = new Predator(x, y, 3);
+                let pred = new Predator(x, y);
                 predatorArr.push(pred);
             } else if (matrix[y][x] == 4) {
-                let per = new Person(x, y, 4);
+                let per = new Person(x, y);
                 personArr.push(per);
             } else if (matrix[y][x] == 5) {
-                let pois = new Poison(x, y, 5);
+                let pois = new Poison(x, y);
                 poisonArr.push(pois);
             } else if (matrix[y][x] == 6) {
-                let antven = new AntiVenom(x, y, 6);
+                let antven = new AntiVenom(x, y);
                 antiVenomArr.push(antven);
+            }else if (matrix[y][x] == 7) {
+                let lig = new Lighting(x, y);
+                lightingArr.push(lig);
             }
         }
     }
@@ -163,6 +170,9 @@ function methods() {
     }
     for (let i in antiVenomArr) {
         antiVenomArr[i].eat()
+    }for(let i in lightingArr){
+        lightingArr[i].eat()
+
     }
     io.sockets.emit("send matrix", matrix);
 }
@@ -173,21 +183,30 @@ io.on('connection', function () {
 })
 
 
-function lighting() {
-    for (let y = 0; y < matrix.length; y++) {
-        for (let x = 0; x < matrix[y].length; x++) {
-            if (matrix[y][x] == 0) {
-                matrix[y][x] = 7
-                io.sockets.emit("send matrix", matrix)
-                return
-            }
+function lighting(lightingCount) {
+    console.log("lllllll====>>>>", lightingCount);
+    // for (let y = 0; y < matrix.length; y++) {
+    //     for (let x = 0; x < matrix[y].length; x++) {
+    //         if (matrix[y][x] == 0) {
+    //             matrix[y][x] = 7
+    //             io.sockets.emit("send matrix", matrix)
+    //             return
+    //         }
 
+    //     }
+
+    // }
+    for (let j = 0; j < lightingCount; j++) {
+
+        let x = Math.floor(Math.random() * matrix.length)
+        let y = Math.floor(Math.random() * matrix.length)
+
+        if (matrix[y][x] == 0) {
+            matrix[y][x] = 7
         }
-
     }
-    if (matrix[y][x] == 0) {
-        matrix[y][x] = 6
-    }
+    io.sockets.emit("send matrix", matrix)
+  
 }
 
 io.on('connection',function(socket){
@@ -206,17 +225,17 @@ let statistic = {
 }
 
 
-setInterval(function(){
-    statistic.grass = grassArr.length;
-    statistic.grassEater = grassEaterArr.length;
-    statistic.predator = predatorArr.length;
-    statistic.poison = poisonArr.length;
-    statistic.person = personArr.length;
-    statistic.antiVenom = antiVenomArr.length;
+// setInterval(function(){
+//     statistic.grass = grassArr.length;
+//     statistic.grassEater = grassEaterArr.length;
+//     statistic.predator = predatorArr.length;
+//     statistic.poison = poisonArr.length;
+//     statistic.person = personArr.length;
+//     statistic.antiVenom = antiVenomArr.length;
 
-    fs.writeFile("statistics.json", JSON.stringify(statistic),()=>{
-        console.log("Writed statistic to file !!!");
-    })
+//     fs.writeFile("statistics.json", JSON.stringify(statistic),()=>{
+//         console.log("Writed statistic to file !!!");
+//     })
 
 
-}, 6000)
+// }, 6000)

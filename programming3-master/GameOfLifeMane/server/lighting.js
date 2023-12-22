@@ -8,12 +8,16 @@ module.exports = class Lighting extends LivingCreature {
     }
     eat() {
         let foods = this.chooseCell(1, 2, 3, 4, 5)
-
+        let ar = []
         if (foods) {
-            let newX = food[0]
-            let newY = food[1]
 
-            matrix[newY][newX] = 7
+            for(i in ar){
+                newX=ar[i][0]
+                newY=ar[i][1]
+
+            }
+
+            matrix[newY][newX] = 0
             matrix[this.y][this.x] = 0
 
             for (let i in poisonArr) {
@@ -62,4 +66,5 @@ module.exports = class Lighting extends LivingCreature {
             this.y = newY
         }
     }
+
 }
